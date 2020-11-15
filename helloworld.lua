@@ -26,7 +26,7 @@ function sum2numfast(numbs, target)
     end
 end
 
-print(sum2numfast({11, 6, 1, 1, 8, 7}, 9));
+-- print(sum2numfast({11, 6, 1, 1, 8, 7}, 9));
 
 function isVaild(s)
     stack = {}
@@ -53,3 +53,33 @@ end
 
 -- print(isVaild('{(){}[]}'));
 
+function trapWater(heights)
+    if #heights == 0 then
+        return 0
+    end
+    leftMax = 0
+    rightMax = 0
+    left = 1
+    right = #heights
+    area = 0
+    while left <= right do
+        if leftMax < rightMax then
+            if heights[left] < leftMax then
+                area = area + leftMax - heights[left]
+            else
+                leftMax = heights[left]
+            end
+            left = left + 1
+        else
+            if heights[right] < rightMax then
+                area = area + rightMax - heights[right]
+            else
+                rightMax = heights[right]
+            end
+            right = right - 1
+        end
+    end
+    return area
+end
+
+-- print(trapWater({0,1,0,2,1,0,1,3,2,1,2,1}))
